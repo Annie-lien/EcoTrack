@@ -1,47 +1,40 @@
 package com.example.ecotrack
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.ecotrack.ui.theme.EcoTrackTheme
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            EcoTrackTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.act_main)
+
+        val totalWasteTextView: TextView = findViewById(R.id.totalWasteTextView)
+        totalWasteTextView.text = "Total Waste Tracked: 150 kg"
+
+        val quickLogButton: Button = findViewById(R.id.quickLogButton)
+        quickLogButton.setOnClickListener {
+            startActivity(Intent(this, LogWasteAct::class.java))
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        val goalsButton: Button = findViewById(R.id.goalsButton)
+        goalsButton.setOnClickListener {
+            startActivity(Intent(this, GoalAct::class.java))
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EcoTrackTheme {
-        Greeting("Android")
+        val tipsResourcesButton: Button = findViewById(R.id.tipsResourcesButton)
+        tipsResourcesButton.setOnClickListener {
+            startActivity(Intent(this, TipsAndResAct::class.java))
+        }
+
+        val communityChallengesButton: Button = findViewById(R.id.communityChallengesButton)
+        communityChallengesButton.setOnClickListener {
+            startActivity(Intent(this, CommunityChallengesAct::class.java))
+        }
     }
 }
